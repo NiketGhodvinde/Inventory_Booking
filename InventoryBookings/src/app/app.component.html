@@ -1,0 +1,39 @@
+<div class="upload-container">
+    <h2>Upload CSV File</h2>
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="onUpload()" [disabled]="!selectedFile">Upload</button>
+  
+    <div *ngIf="uploadStatus" class="status">
+      <p>{{ uploadStatus }}</p>
+    </div>
+  </div>
+  
+  
+  <div class="booking-container">
+    <h2>Bookings</h2>
+  
+    <!-- Table to display bookings -->
+    <table *ngIf="bookings && bookings.length > 0" class="bordered-table">
+      <thead>
+        <tr>
+          <th>Member Name</th>
+          <th>Inventory Name</th>
+          <th>Booking Reference</th>
+          <th>Booking Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings">
+          <td>{{ booking.memberName }}</td>
+          <td>{{ booking.inventoryName }}</td>
+          <td>{{ booking.bookingReference }}</td>
+          <td>{{ booking.bookingDate | date }}</td>
+          <td>{{ booking.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- If no bookings are available -->
+    <p *ngIf="!bookings || bookings.length === 0">No bookings available.</p>
+  </div>
